@@ -1,4 +1,8 @@
+
+import 'package:fbauth/home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 class FacebookAuth extends StatefulWidget {
   @override
@@ -6,44 +10,31 @@ class FacebookAuth extends StatefulWidget {
 }
 
 class _FacebookAuthState extends State<FacebookAuth> {
-  bool isLoggedIn= true;
-  Map userProfile;
 
-  _logInWithFB() async{
+  FacebookLogin fbLogin = new FacebookLogin();
 
-  }
-
-  _logOut(){
-
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: isLoggedIn ? Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.network(
-              "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1024px-User_icon_2.svg.png",
-              height: 50,
-              width: 50,
-            ),
-            Text(''),
-            OutlineButton(
-              child: Text('Login With Facebook'),
-              onPressed: (){
-                _logOut();
-              },
-            ),
-          ],
-        ):
-        OutlineButton(
-          child: Text('Login With Facebook'),
+        child: RaisedButton(
+          child: Text("Login FB"),
           onPressed: (){
-            _logInWithFB(
-              
-            );
+            fbLogin.logIn(['email','public_profile']).then((result) {
+              // switch(result.status){
+              //   case FacebookLoginStatus.loggedIn:
+              //   FirebaseAuth.instance.signInWithFacebook(accessToken: result.accessToken.token)
+              //   .then((signedInUser){
+              //     print('Signed in as ${signedInUser.displayName}');
+              //     Navigator.push(context, MaterialPageRoute(builder: (context) => Home(),));
+              //   }).catchError((e){
+              //     print(e);
+              //   });
+              // }
+            }).catchError((e){
+              print(e);
+            });
           },
         ),
       ),

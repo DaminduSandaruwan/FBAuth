@@ -21,8 +21,11 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  firebase_auth: ^0.8.0+1
   flutter:
     sdk: flutter
+  flutter_facebook_login:
+  
 
 
   # The following adds the Cupertino Icons font to your application.
